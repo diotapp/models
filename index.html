@@ -11,24 +11,52 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background-color: #f0f0f0;
+      position: relative; /* Для абсолютного позиционирования кнопки */
     }
     model-viewer {
-      width: 80%;
-      height: 80%;
+      width: 100%;
+      height: 100%;
       background-color: white;
       border: 1px solid #ccc;
+    }
+
+    /* Скрыть стандартную кнопку AR */
+    model-viewer::part(ar-button) {
+      display: none;
+    }
+
+    /* Стили для пользовательской кнопки AR */
+    #custom-ar-button {
+      position: absolute;
+      top: 20px; /* Отступ сверху */
+      left: 20px; /* Отступ слева */
+      background-color: #007bff; /* Цвет фона кнопки */
+      color: white; /* Цвет текста */
+      border: none; /* Убрать границы */
+      border-radius: 5px; /* Скругление углов */
+      padding: 15px 25px; /* Отступы внутри кнопки */
+      font-size: 18px; /* Размер шрифта */
+      cursor: pointer; /* Курсор при наведении */
+      z-index: 10; /* Чтобы кнопка была поверх модели */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для объёма */
+      transition: background-color 0.3s; /* Плавный переход цвета */
+    }
+
+    #custom-ar-button:hover {
+      background-color: #0056b3; /* Цвет кнопки при наведении */
     }
   </style>
 </head>
 <body>
+  <!-- Пользовательская кнопка AR -->
+  <button id="custom-ar-button">Войти в AR</button>
+
   <!-- Подключение .glb и .usdz из хранилища -->
   <model-viewer
-    src="models/simulation.glb"
-    ios-src="models/simulation.usdz"
+    id="model-viewer"
+    src="models/untitled.glb"
+    ios-src="models/untitled.usdz"
     alt="3D model with animation"
     ar
     ar-modes="scene-viewer quick-look"
@@ -37,5 +65,16 @@
     animation-loop
     auto-rotate>
   </model-viewer>
+
+  <script>
+    // Получаем элементы кнопки и model-viewer
+    const arButton = document.getElementById('custom-ar-button');
+    const modelViewer = document.getElementById('model-viewer');
+
+    // Добавляем обработчик события клика на кнопку
+    arButton.addEventListener('click', () => {
+      modelViewer.enterAR();
+    });
+  </script>
 </body>
 </html>

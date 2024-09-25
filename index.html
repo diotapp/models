@@ -3,47 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <title>3D Model with AR and Animation</title>
-  <!-- Подключение библиотеки model-viewer -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #f0f0f0;
-      position: relative; /* Для абсолютного позиционирования кнопки */
-    }
-    model-viewer {
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      border: 1px solid #ccc;
+    body { margin: 0; overflow: hidden; }
+    #ar-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transform: scale(1.2); /* Увеличение на 120% */
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
     }
 
-    /* Изменение стандартной кнопки AR */
-    model-viewer::part(ar-button) {
-      position: absolute;
-      top: 20px; /* Отступ сверху */
-      left: 20px; /* Отступ слева */
-      transform: scale(1.4); /* Увеличить на 40% */
-      z-index: 10; /* Поверх других элементов */
+    #ar-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <!-- Подключение .glb и .usdz из хранилища -->
-  <model-viewer
-    id="model-viewer"
-    src="models/untitled.glb"
-    ios-src="models/untitled.usdz"
-    alt="3D model with animation"
-    ar
-    ar-modes="scene-viewer quick-look"
-    camera-controls
-    autoplay
-    animation-loop
-    auto-rotate>
-  </model-viewer>
+  <button id="ar-button">Войти в AR</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/webxr/ARButton.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js"></script>
+  <script>
+    let scene, camera, renderer, controller;
+    let mixer;
+
+    init();
+    animate();
+
+    function init() {
+      // Создание сцены
+      scene = new THREE.Scene();
+
+      // Создание камеры
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
+
+      // Создание рендерера
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.xr.enabled = true;
+      document.body.appendChild(renderer.domElement);
+
+      // Добавление света
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      light.position.set(0.5, 1, 0.25);
+      scene.add(light);
+
+      // Загрузка модели с анимацией
+      const loader = new THREE.GLTFLoader();
+      loader.load('models/simulation.glb', function(gltf) {
+        const model = gltf.scene;
+        scene.add(model);
+
+        // Настройка анимации
+        mixer = new THREE.AnimationMixer(model);
+        gltf.animations.forEach((clip) => {
+          mixer.clipAction(clip).play();
+        });
+
+        // Установка позиции модели
+        model.position.set(0, 0, -1); // Перед камерой
+      }, undefined, function(error) {
+        console.error(error);
+      });
+
+      // Добавление AR кнопки через Three.js ARButton
+      // Мы будем использовать нашу кастомную кнопку, поэтому ARButton не добавляем автоматически
+      // Вместо этого, свяжем нашу кнопку с запуском AR сессии
+
+      const arButton = document.getElementById('ar-button');
+      arButton.addEventListener('click', () => {
+        // Проверка поддержки WebXR
+        if (navigator.xr) {
+          navigator.xr.requestSession('immersive-ar', {
+            requiredFeatures: ['hit-test']
+          }).then(onSessionStarted);
+        } else {
+          alert('WebXR не поддерживается вашим браузером.');
+        }
+      });
+
+      function onSessionStarted(session) {
+        renderer.xr.setSession(session);
+      }
+
+      window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate(time) {
+      renderer.setAnimationLoop(render);
+    }
+
+    function render() {
+      if (mixer) mixer.update(0.01);
+      renderer.render(scene, camera);
+    }
+  </script>
 </body>
 </html>

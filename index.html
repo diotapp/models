@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Модель в AR</title>
+  <title>3D model</title>
   <!-- Подключение библиотеки model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
@@ -20,9 +20,11 @@
 </head>
 <body>
   <model-viewer
+	<!-- Подключение .glb -->
     src="https://drive.google.com/uc?export=download&id=17BdcuVqGiuPF5SojzcusdEsksvz4a761"
+	<!-- Подключение .usdz -->
     ios-src="https://drive.google.com/uc?export=download&id=1EwYsMVJFs7d1xwY9Lya0Pm8PcDyVckx-"
-    alt="3D модель"
+    alt="3D model"
     ar
     ar-modes="scene-viewer quick-look"
     camera-controls

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>3D model</title>
   <!-- Подключение библиотеки model-viewer -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -19,14 +19,15 @@
   </style>
 </head>
 <body>
-  <!-- Подключение .glb и .usdz из репозитория -->
   <model-viewer
-    src="models/untitled.glb"
-    ios-src="models/untitled.usdz"
+    src="models/simulation.glb"
+    ios-src="models/simulation.usdz"
     alt="3D model"
     ar
     ar-modes="scene-viewer quick-look"
     camera-controls
+    autoplay
+    animation-loop
     auto-rotate>
   </model-viewer>
 </body>

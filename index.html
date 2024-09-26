@@ -8,30 +8,30 @@
   <style>
     /* Сброс отступов и установка размеров для body и html */
     body, html {
-      margin: 0;                               /* Убираем внешние отступы */
-      padding: 0;                              /* Убираем внутренние отступы */
-      width: 200%;                             /* Устанавливаем ширину на 100% экрана */
-      height: 200%;                            /* Устанавливаем высоту на 100% экрана */
+      margin: 0;
+      padding: 0;
+      width: 200%;
+      height: 200%;
     }
     /* Установка размеров элемента model-viewer */
     model-viewer {
-      width: 200%;                             /* Устанавливаем ширину на 100% родительского элемента */
-      height: 200%;                            /* Устанавливаем высоту на 100% родительского элемента */
+      width: 200%;
+      height: 200%;
     }
   </style>
 </head>
 <body>
   <!-- Встраиваем 3D-модель с помощью model-viewer -->
   <model-viewer
-    src="models/models.glb"                    <!-- Путь к GLB-файлу 3D-модели -->
-    ios-src="models/models.usdz"               <!-- Путь к USDZ-файлу для iOS устройств -->
-    alt="3D model"                             <!-- Альтернативный текст для модели -->
-    ar                                         <!-- Включаем режим дополненной реальности -->
-    ar-modes="scene-viewer quick-look"         <!-- Указываем режимы AR для Android и iOS -->
-    camera-controls                            <!-- Включаем управление камерой (зум, вращение) -->
-    autoplay                                   <!-- Автоматически запускаем анимацию -->
-    animation-loop                             <!-- Включаем циклическое воспроизведение анимации -->
-    auto-rotate>                               <!-- Включаем автоматическое вращение модели -->
+    src="models/models.glb"
+    ios-src="models/models.usdz"
+    alt="3D model"
+    ar
+    ar-modes="scene-viewer quick-look"
+    camera-controls
+    autoplay
+    animation-loop
+    auto-rotate>
   </model-viewer>
 </body>
 </html>

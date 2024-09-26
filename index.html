@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>3D model</title>
-  <!-- Подключение библиотеки model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
   <style>
-    /* Сброс отступов и установка размеров для body и html */
     body, html {
       margin: 0;
       padding: 0;
       width: 200%;
       height: 200%;
     }
-    /* Установка размеров элемента model-viewer */
     model-viewer {
       width: 200%;
       height: 200%;
@@ -21,7 +18,6 @@
   </style>
 </head>
 <body>
-  <!-- Встраиваем 3D-модель с помощью model-viewer -->
   <model-viewer
     src="models/models.glb"
     ios-src="models/models.usdz"

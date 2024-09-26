@@ -17,44 +17,36 @@
       height: 100%;
     }
 
-    /* Скрываем стандартную кнопку AR в левом нижнем углу */
+    /* Скрываем стандартную AR кнопку */
     model-viewer::part(ar-button) {
-      display: none; /* Полное скрытие кнопки AR */
+      display: none;
     }
 
-    /* Добавляем новый элемент с текстом "AR" в правом верхнем углу */
+    /* Настраиваем новую кнопку с иконкой */
     .custom-ar-button {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-      background-color: rgba(0, 123, 255, 0.8);
-      color: white;
+      bottom: 20px;
+      left: 20px;
+      width: 60px; /* Ширина иконки */
+      height: 60px; /* Высота иконки */
+      background: url('models/icons/AR+.png') no-repeat center center;
+      background-size: contain;
       border: none;
-      border-radius: 18px;
-      padding: 10px 20px;
-      font-size: 16px;
       cursor: pointer;
-      text-align: center;
+      z-index: 10;
     }
 
-    /* Эффект при наведении мыши */
+    /* Кнопка изменяет фон при наведении */
     .custom-ar-button:hover {
-      background-color: rgba(0, 105, 217, 0.8);
+      background-color: rgba(0, 105, 217, 0.1);
     }
 
-    /* Медиазапрос для мобильных устройств */
-    @media only screen and (max-width: 600px) {
-      .custom-ar-button {
-        padding: 15px 25px;
-        font-size: 18px;
-      }
-    }
   </style>
 </head>
 <body>
   <!-- Подключение модели -->
   <model-viewer
+    id="model"
     src="models/fan.glb"
     ios-src="models/fan.usdz"
     alt="3D model"
@@ -67,7 +59,8 @@
     auto-rotate>
   </model-viewer>
 
-  <!-- Новая кнопка AR -->
-  <button class="custom-ar-button">AR</button>
+  <!-- Иконка куба в левом нижнем углу, запускающая AR -->
+  <button class="custom-ar-button" onclick="document.querySelector('#model').activateAR()"></button>
+
 </body>
 </html>

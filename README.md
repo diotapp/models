@@ -1,1 +1,1 @@
-link: [diotapp]([(https://diotapp.github.io/models/)])
+link: [diotapp]([url](https://diotapp.github.io/models/))

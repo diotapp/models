@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model</title>
+  <title>3D Model with Animation in AR</title>
   <!-- Подключение библиотеки model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
   <style>
@@ -43,10 +43,10 @@
   <!-- Подключение модели -->
   <model-viewer
     src="models/untitled.glb"
-    ios-src="models/untitled.usdz"
-    alt="3D Model"
+    ios-src="models/untitled.usdz" <!-- Обновленный USDZ-файл с анимацией -->
+    alt="3D Model with Animation"
     ar
-    ar-modes="scene-viewer quick-look webxr"
+    ar-modes="quick-look" <!-- Указываем только quick-look для iOS -->
     camera-controls
     autoplay
     animation-loop

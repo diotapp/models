@@ -1,73 +1,34 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Устанавливаем язык страницы на английский -->
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model</title>
+  <title>3D model</title>
   <!-- Подключение библиотеки model-viewer -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
   <style>
-    /* Сброс отступов и установка размеров для body и html */
     body, html {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
     }
-
-    /* Установка размеров элемента model-viewer */
     model-viewer {
       width: 100%;
       height: 100%;
     }
-
-    /* Стилизация и увеличение кнопки AR */
-    model-viewer::part(ar-button) {
-      /* Увеличиваем кнопку на 150% */
-      transform: scale(1.5);
-      /* Позиционирование кнопки внизу справа */
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      z-index: 10;
-      /* Стилизация кнопки */
-      background-color: rgba(0, 123, 255, 0.8);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    /* Изменение цвета кнопки при наведении */
-    model-viewer::part(ar-button):hover {
-      background-color: rgba(0, 105, 217, 0.8);
-    }
-
-    /* Медиазапрос для увеличения кнопки на мобильных устройствах */
-    @media only screen and (max-width: 600px) {
-      model-viewer::part(ar-button) {
-        /* Увеличиваем кнопку на 150% на мобильных устройствах */
-        transform: scale(1.5);
-        bottom: 15px;
-        right: 15px;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Встраиваем 3D-модель с помощью model-viewer -->
   <model-viewer
-    src="models/models.glb"                      <!-- Путь к GLB-файлу модели с анимацией -->
-    ios-src="models/models.usdz"                 <!-- Путь к USDZ-файлу модели с анимацией для iOS -->
-    alt="3D Model"                               <!-- Альтернативный текст для модели -->
-    ar                                           <!-- Включаем режим дополненной реальности -->
-    ar-modes="scene-viewer quick-look"           <!-- Указываем режимы AR для Android и iOS -->
-    camera-controls                              <!-- Включаем управление камерой (зум, вращение) -->
-    autoplay                                     <!-- Автоматически запускаем анимацию -->
-    animation-name="Animation"                   <!-- Указываем имя анимации (если их несколько) -->
-    animation-loop                               <!-- Включаем циклическое воспроизведение анимации -->
-    auto-rotate>                                 <!-- Включаем автоматическое вращение модели -->
+    src="models/models.glb"
+    ios-src="models/models.usdz"
+    alt="3D model"
+    ar
+    ar-modes="scene-viewer quick-look"
+    camera-controls
+    autoplay
+    animation-loop
+    auto-rotate>
   </model-viewer>
 </body>
 </html>

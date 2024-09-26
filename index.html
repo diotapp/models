@@ -19,7 +19,7 @@
 
     /* Стилизация и увеличение кнопки AR */
     model-viewer::part(ar-button) {
-      transform: scale(10.50); /* Увеличение кнопки на 1050% */
+      transform: scale(5); /* Увеличение кнопки AR в 5 раз */
       position: absolute;
       bottom: 20px; /* Размещаем кнопку внизу для удобства */
       right: 20px;
@@ -40,7 +40,7 @@
     /* Медиазапрос для увеличения кнопки на мобильных устройствах */
     @media only screen and (max-width: 600px) {
       model-viewer::part(ar-button) {
-        transform: scale(50); /* Увеличиваем кнопку на 200% на мобильных устройствах */
+        transform: scale(10); /* Увеличиваем кнопку на 10 раз на мобильных устройствах */
         bottom: 15px;
         right: 15px;
       }

@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model with Animation</title>
+  <title>3D Модель с Анимацией в AR</title>
   <!-- Подключение библиотеки model-viewer -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -21,10 +21,9 @@
     model-viewer::part(ar-button) {
       transform: scale(1.5); /* Увеличение кнопки на 150% */
       position: absolute;
-      top: 20px;
-      left: 20px;
+      bottom: 20px; /* Размещаем кнопку внизу для удобства */
+      right: 20px;
       z-index: 10;
-      /* Дополнительные стили */
       background-color: rgba(0, 123, 255, 0.8);
       color: white;
       border: none;
@@ -37,6 +36,15 @@
     model-viewer::part(ar-button):hover {
       background-color: rgba(0, 105, 217, 0.8);
     }
+
+    /* Медиазапрос для увеличения кнопки на мобильных устройствах */
+    @media only screen and (max-width: 600px) {
+      model-viewer::part(ar-button) {
+        transform: scale(2); /* Увеличиваем кнопку на 200% на мобильных устройствах */
+        bottom: 15px;
+        right: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -44,11 +52,12 @@
   <model-viewer
     src="models/untitled.glb"
     ios-src="models/untitled.usdz"
-    alt="3D Model with Animation"
+    alt="3D Модель с Анимацией"
     ar
-    ar-modes="quick-look"
+    ar-modes="scene-viewer quick-look"
     camera-controls
     autoplay
+    animation-name="Animation"
     animation-loop
     auto-rotate>
   </model-viewer>

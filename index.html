@@ -1,55 +1,65 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Установили язык страницы на английский -->
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>3D Model</title>
   <!-- Подключение библиотеки model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    /* Сброс отступов и размеров для тела документа и HTML */
     body, html {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
     }
-    /* Устанавливаем размеры элемента model-viewer */
     model-viewer {
       width: 100%;
       height: 100%;
     }
-    /* Стилизация кнопки AR для увеличения стандартной иконки */
+
+    /* Стилизация и увеличение кнопки AR */
     model-viewer::part(ar-button) {
-      /* Увеличиваем масштаб кнопки */
-      transform: scale(3); /* Увеличение кнопки в 3 раза */
-      /* Позиционирование кнопки */
+      transform: scale(1.5); /* Увеличение кнопки на 150% */
       position: absolute;
-      bottom: 20px; /* Отступ от нижнего края */
-      left: 20px;   /* Отступ от левого края */
-      z-index: 10;  /* Расположение над другими элементами */
-      /* Убираем стандартные стили */
-      background-color: transparent; /* Прозрачный фон */
-      border: none;                  /* Без границы */
-      padding: 0;                    /* Нулевые внутренние отступы */
+      bottom: 20px; /* Размещаем кнопку внизу для удобства */
+      right: 20px;
+      z-index: 10;
+      background-color: rgba(0, 123, 255, 0.8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
     }
+
     model-viewer::part(ar-button):hover {
-      /* Можно добавить эффект при наведении курсора, если необходимо */
+      background-color: rgba(0, 105, 217, 0.8);
+    }
+
+    /* Медиазапрос для увеличения кнопки на мобильных устройствах */
+    @media only screen and (max-width: 600px) {
+      model-viewer::part(ar-button) {
+        transform: scale(2); /* Увеличиваем кнопку на 200% на мобильных устройствах */
+        bottom: 15px;
+        right: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Подключение модели -->
   <model-viewer
-    src="models/fan.glb"                     <!-- Путь к 3D-модели в формате GLB -->
-    ios-src="models/fan.usdz"                <!-- Путь к 3D-модели в формате USDZ для iOS -->
-    alt="3D Model"                           <!-- Альтернативный текст на английском -->
-    ar                                       <!-- Включение режима дополненной реальности -->
-    ar-modes="scene-viewer quick-look"       <!-- Режимы AR для Android и iOS -->
-    camera-controls                          <!-- Включение управления камерой -->
-    autoplay                                 <!-- Автоматическое воспроизведение анимации -->
-    animation-name="Animation"               <!-- Имя анимации, если их несколько -->
-    animation-loop                           <!-- Циклическое воспроизведение анимации -->
-    auto-rotate>                             <!-- Автоматическое вращение модели -->
+    src="models/fan.glb"
+    ios-src="models/fan.usdz"
+    alt="3D Model"
+    ar
+    ar-modes="scene-viewer quick-look"
+    camera-controls
+    autoplay
+    animation-name="Animation"
+    animation-loop
+    auto-rotate>
   </model-viewer>
 </body>
 </html>

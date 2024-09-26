@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model with AR and Animation</title>
+  <title>3D Model</title>
   <!-- Подключение библиотеки model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
   <style>
@@ -11,29 +11,25 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      background-color: #f0f0f0;
-      position: relative; /* Для абсолютного позиционирования кнопки */
     }
     model-viewer {
       width: 100%;
       height: 100%;
-      background-color: white;
-      border: 1px solid #ccc;
     }
 
-    /* Изменение стандартной кнопки AR */
+    /* Стилизация и увеличение кнопки AR */
     model-viewer::part(ar-button) {
+      transform: scale(1.5); /* Увеличение кнопки на 150% */
       position: absolute;
-      top: 20px; /* Отступ сверху */
-      left: 20px; /* Отступ слева */
-      transform: scale(1.2); /* Увеличить на 120% */
-      z-index: 10; /* Поверх других элементов */
-      /* Дополнительные стили для улучшения внешнего вида */
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      /* Дополнительные стили */
       background-color: rgba(0, 123, 255, 0.8);
+      color: white;
       border: none;
       border-radius: 8px;
       padding: 10px 20px;
-      color: white;
       font-size: 16px;
       cursor: pointer;
     }
@@ -41,22 +37,16 @@
     model-viewer::part(ar-button):hover {
       background-color: rgba(0, 105, 217, 0.8);
     }
-
-    /* Скрыть стандартную кнопку AR для <model-viewer> */
-    model-viewer::part(ar-button-container) {
-      display: none;
-    }
   </style>
 </head>
 <body>
-  <!-- Подключение .glb и .usdz из хранилища -->
+  <!-- Подключение модели -->
   <model-viewer
-    id="model-viewer"
     src="models/untitled.glb"
     ios-src="models/untitled.usdz"
-    alt="3D model with animation"
+    alt="3D Model"
     ar
-    ar-modes="scene-viewer quick-look"
+    ar-modes="scene-viewer quick-look webxr"
     camera-controls
     autoplay
     animation-loop

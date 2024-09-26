@@ -17,16 +17,15 @@
       height: 100%;
     }
 
-    /* Увеличиваем иконку AR внутри кнопки */
-    model-viewer::part(ar-button) svg {
-      width: 150%; /* Увеличение иконки AR на 50% */
-      height: 150%;
+    /* Скрываем стандартную кнопку AR в левом нижнем углу */
+    model-viewer::part(ar-button) {
+      display: none; /* Полное скрытие кнопки AR */
     }
 
-    /* Стилизация и увеличение кнопки AR */
-    model-viewer::part(ar-button) {
+    /* Добавляем новый элемент с текстом "AR" в правом верхнем углу */
+    .custom-ar-button {
       position: absolute;
-      bottom: 20px;
+      top: 20px;
       right: 20px;
       z-index: 10;
       background-color: rgba(0, 123, 255, 0.8);
@@ -36,18 +35,19 @@
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      text-align: center;
     }
 
-    model-viewer::part(ar-button):hover {
+    /* Эффект при наведении мыши */
+    .custom-ar-button:hover {
       background-color: rgba(0, 105, 217, 0.8);
     }
 
-    /* Медиазапрос для увеличения кнопки на мобильных устройствах */
+    /* Медиазапрос для мобильных устройств */
     @media only screen and (max-width: 600px) {
-      model-viewer::part(ar-button) {
-        transform: scale(1.5); /* Увеличение кнопки на мобильных устройствах */
-        bottom: 15px;
-        right: 15px;
+      .custom-ar-button {
+        padding: 15px 25px;
+        font-size: 18px;
       }
     }
   </style>
@@ -66,5 +66,8 @@
     animation-loop
     auto-rotate>
   </model-viewer>
+
+  <!-- Новая кнопка AR -->
+  <button class="custom-ar-button">AR</button>
 </body>
 </html>

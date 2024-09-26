@@ -17,11 +17,16 @@
       height: 100%;
     }
 
+    /* Увеличиваем иконку AR внутри кнопки */
+    model-viewer::part(ar-button) svg {
+      width: 150%; /* Увеличение иконки AR на 50% */
+      height: 150%;
+    }
+
     /* Стилизация и увеличение кнопки AR */
     model-viewer::part(ar-button) {
-      transform: scale(5); /* Увеличение кнопки AR в 5 раз */
       position: absolute;
-      bottom: 20px; /* Размещаем кнопку внизу для удобства */
+      bottom: 20px;
       right: 20px;
       z-index: 10;
       background-color: rgba(0, 123, 255, 0.8);
@@ -40,7 +45,7 @@
     /* Медиазапрос для увеличения кнопки на мобильных устройствах */
     @media only screen and (max-width: 600px) {
       model-viewer::part(ar-button) {
-        transform: scale(10); /* Увеличиваем кнопку на 10 раз на мобильных устройствах */
+        transform: scale(1.5); /* Увеличение кнопки на мобильных устройствах */
         bottom: 15px;
         right: 15px;
       }
